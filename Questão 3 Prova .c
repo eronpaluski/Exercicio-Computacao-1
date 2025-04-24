@@ -19,7 +19,7 @@ int main ()
     if (dano_total > 5000)
         printf ("DANO CRITICO MASSIVO! \n");
 
-    else if (dano_total > 1000 && dano_total < 5000)
+    else if (dano_total > 1000)
         printf ("DANO CRITICO! \n");
 
     else
