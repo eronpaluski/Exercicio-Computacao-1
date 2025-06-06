@@ -1,0 +1,157 @@
+#include <stdio.h>
+
+#define TAM 10
+
+void criarMatrizes(int A[TAM][TAM], int B[TAM][TAM]);
+void imprimirMatrizes(int A[TAM][TAM], int B[TAM][TAM], int criadas);
+void somarMatrizes(int A[TAM][TAM], int B[TAM][TAM], int criadas);
+void subtrairMatrizes(int A[TAM][TAM], int B[TAM][TAM], int criadas);
+void multiplicarConstante(int A[TAM][TAM], int criadas);
+
+int main() {
+    int A[TAM][TAM];
+    int B[TAM][TAM];
+    int criadas = 0; // 0 = não criadas, 1 = criadas
+    int opcao;
+
+    do {
+        printf("\nMENU\n");
+        printf("0 - Criar matrizes\n");
+        printf("1 - Imprimir matrizes\n");
+        printf("2 - Somar matrizes\n");
+        printf("3 - Subtrair matriz A de B\n");
+        printf("4 - Multiplicar constante à matriz A\n");
+        printf("5 - Sair\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+
+        switch(opcao) {
+            case 0:
+                criarMatrizes(A, B);
+                criadas = 1;
+                break;
+            case 1:
+                imprimirMatrizes(A, B, criadas);
+                break;
+            case 2:
+                somarMatrizes(A, B, criadas);
+                break;
+            case 3:
+                subtrairMatrizes(A, B, criadas);
+                break;
+            case 4:
+                multiplicarConstante(A, criadas);
+                break;
+            case 5:
+                printf("Encerrando o programa...\n");
+                break;
+            default:
+                printf("Opcao invalida.\n");
+        }
+    } while (opcao != 5);
+
+    return 0;
+}
+
+void criarMatrizes(int A[TAM][TAM], int B[TAM][TAM]) {
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            A[i][j] = (i * 2 + j) % 10;
+            B[i][j] = (i + j * 3) % 10;
+        }
+    }
+    printf("Matrizes criadas com sucesso!\n");
+}
+
+void imprimirMatrizes(int A[TAM][TAM], int B[TAM][TAM], int criadas) {
+    if (!criadas) {
+        printf("As matrizes ainda nao foram criadas.\n");
+        return;
+    }
+
+    printf("\nMatriz A:\n");
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            printf("%2d ", A[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\nMatriz B:\n");
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            printf("%2d ", B[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void somarMatrizes(int A[TAM][TAM], int B[TAM][TAM], int criadas) {
+    if (!criadas) {
+        printf("As matrizes ainda nao foram criadas.\n");
+        return;
+    }
+
+    int resultado[TAM][TAM];
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            resultado[i][j] = A[i][j] + B[i][j];
+        }
+    }
+
+    printf("\nResultado da soma (A + B):\n");
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            printf("%2d ", resultado[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void subtrairMatrizes(int A[TAM][TAM], int B[TAM][TAM], int criadas) {
+    if (!criadas) {
+        printf("As matrizes ainda nao foram criadas.\n");
+        return;
+    }
+
+    int resultado[TAM][TAM];
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            resultado[i][j] = B[i][j] - A[i][j];
+        }
+    }
+
+    printf("\nResultado da subtracao (B - A):\n");
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            printf("%3d ", resultado[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void multiplicarConstante(int A[TAM][TAM], int criadas) {
+    if (!criadas) {
+        printf("As matrizes ainda nao foram criadas.\n");
+        return;
+    }
+
+    int constante;
+    printf("Digite a constante para multiplicar a matriz A: ");
+    scanf("%d", &constante);
+
+    int resultado[TAM][TAM];
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            resultado[i][j] = A[i][j] * constante;
+        }
+    }
+
+    printf("\nResultado da multiplicacao:\n");
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            printf("%4d ", resultado[i][j]);
+        }
+        printf("\n");
+    }
+}
